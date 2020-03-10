@@ -1,0 +1,50 @@
+(3/10/20)
+- created 3 new notebooks in "Fall2014" and "Catalogs" for breakdown of individual csv files
+
+- In FALL2014 (for COURSES), isnull didn't pick up missing values- missing values are denoted by '[]' in these files, not NaN. I specifically checked for [] in course_meetings_breakdown, but I visually looked at the other csv files (COURSECATALOG for COURSES and COURSE_MEETINGS) to determine NULL/NOT NULL for our database index. If we have time, we should try to figure out a code that can search for it throughout the table in case they exist in other columns. 
+
+
+COURSE_CATALOG (17-18 & 18-19 are identic)
+    program_code TEXT(2) NOT NULL
+    program_name TEXT NOT NULL
+    catalog_id TEXT NOT NULL
+    credits TEXT NOT NULL
+    prereqs TEXT NOT NULL
+    coreqs TEXT
+    fees TEXT
+    attributes TEXT
+    description TEXT
+    
+COURSE_MEETINGS (Fall, Spring, SpringBreak, Summer, Winter (16,17,18,19))
+    term TEXT NOT NULL
+    crn INTEGER NOT NULL
+    location TEXT NOT NULL
+    day TEXT
+    start TEXT NOT NULL
+    end TEXT NOT NULL
+
+COURSES (Fall, Spring, SpringBreak, Summer, Winter (16,17,18,19))
+    term TEXT NOT NULL
+    crn INTEGER NOT NULL
+    catalog_id TEXT NOT NULL
+    section TEXT NOT NULL
+    credits ( <---- not sure what to call this one. DECIMAL? ---- )
+    title TEXT NOT NULL
+    meetings TEXT 
+    timecodes TEXT
+    primary_instructor TEXT NOT NULL
+    cap INTEGER NOT NULL
+    actual INTEGER NOT NULL
+    remaining INTEGER NOT NULL
+
+
+
+## POSSIBLE TABLE HEADERS? ##
+
+YEARS (probably isnt the best title- we'll work on it)
+PROGRAMS
+CATALOGS
+CLASSES (COURSES?)
+PROFESSORS
+MEETINGS (MEETING_TIMES?)
+LOCATIONS
