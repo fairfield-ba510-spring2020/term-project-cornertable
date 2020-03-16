@@ -41,8 +41,8 @@ COURSES (Fall, Spring, SpringBreak, Summer, Winter (16,17,18,19))
 
 ## POSSIBLE TABLE HEADERS? ##
 
-YEARS (probably isnt the best title- we'll work on it)
-PROGRAMS
+YEARS []
+PROGRAMS[program_code,program_name, program_id ]
 CATALOGS
 CLASSES (COURSES?)
 PROFESSORS
