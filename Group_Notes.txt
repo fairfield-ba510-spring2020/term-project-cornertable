@@ -8,7 +8,7 @@ COURSE_CATALOG (17-18 & 18-19 are identic)
     program_code TEXT(2) NOT NULL
     program_name TEXT NOT NULL
     catalog_id TEXT NOT NULL
-    credits TEXT NOT NULL
+    credits
     prereqs TEXT NOT NULL
     coreqs TEXT
     fees TEXT
@@ -28,7 +28,7 @@ COURSES (Fall, Spring, SpringBreak, Summer, Winter (16,17,18,19))
     crn INTEGER NOT NULL
     catalog_id TEXT NOT NULL
     section TEXT NOT NULL
-    credits ( <---- not sure what to call this one. DECIMAL? ---- )
+    credits ( <---- not sure what to call this one. DECIMAL? ---- )   CHECK THISS!!!
     title TEXT NOT NULL
     meetings TEXT 
     timecodes TEXT
