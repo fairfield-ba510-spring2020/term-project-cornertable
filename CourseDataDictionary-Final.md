@@ -43,7 +43,6 @@ Based on the ERD, each attributes in the 3 csv files (CourseCatalog, Courses and
    - `Meetings`:  Calendar duration, time, day and location of the class being held.
    - `Timecodes`: This column is a replica of meetings providing same information
    - `Course_id`: Foreign key to COURSES
-   - `Catalog_id`:Foreign key to COURSES
    - `Professor_id`: Foreign key to PROFESSORS
    
 **MEETINGS (ID-Dependent Entity)**
