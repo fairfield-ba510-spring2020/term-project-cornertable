@@ -19,7 +19,7 @@ For our semester project, Team Cornertable produced a database and a data wareho
 
 ## Step 1 - ERD
 
-The data from the csv files was used to build our Entity Relationship Diagram (ERD) to allow us to visualize the tables and the relationships between the tables. The SourceData folder includes folders for each semester, and each folder includes two csv files (`courses.csv` and `course_meetings`) that provides raw data including courses offerings, course meetings, and program details.  The Catalogs folder contains two additional csv files that provide information related to the different programs offered at Fairfield University.
+The data from the csv files was used to build our Entity Relationship Diagram (ERD) to allow us to visualize the tables and the relationships between the tables. The SourceData folder includes folders for each semester, and each folder includes two csv files (`courses.csv` and `course_meetings`) that provides raw data including course offerings, course meetings, and program details.  The Catalogs folder contains two additional csv files that provide information related to the different programs offered at Fairfield University.
 
 - courses.csv: includes specific details around classes offered at Fairfield University with meeting details for each term.  The columns included are term, crn, catalog_id, section, credits, title, meetings, timecodes, primary_instructor, cap, act, and rem.
 
@@ -53,18 +53,18 @@ The next step in our process was extract, transform and load the data from the g
 
 # Step 3 - Testing Integrity
 
-Our team created a [testing notebook](https://github.com/fairfield-ba510-spring2020/term-project-cornertable/blob/master/CourseDataTests.ipynb)to test the integrity of our database.  This file contains each of the queries we wrote to check:
+Our team created a [testing notebook](https://github.com/fairfield-ba510-spring2020/term-project-cornertable/blob/master/CourseDataTests.ipynb) to test the integrity of our database.  This file contains each of the queries we wrote to check:
 
-- Domain integrity: the allowed values of an attribute determine domain integrity, definitions include data type, length, range or constraints.  This test was completed in cells 3 and 4.  Here we ran SELECT queries to determine that the number of records in each table made sense (CatalogCourses, CourseOfferings, and CourseMeetings).  
+- Domain integrity: the allowed values of an attribute determine domain integrity, definitions include data type, length, range or constraints. Here we ran SELECT queries to determine that the number of records in each table made sense (CatalogCourses, CourseOfferings, and CourseMeetings).  
 
-- Entity integrity: testing to ensure that each object represented by a row in the table should be distiguishable from any other object.  SELECT queries where again utilized to ensure that we successfully retrieved unique values for Professors, Programs, Locations, Courses, Course Offerings, and Meetings (cells 5-10).
+- Entity integrity: testing to ensure that each object represented by a row in the table should be distiguishable from any other object.  SELECT queries where again utilized to ensure that we successfully retrieved unique values for Professors, Programs, Locations, Courses, Course Offerings, and Meetings.
 
       
-- Relational integrity: testing to ensure that table relationships are consistent, or that any foreign key field must agree with the primary key that is referenced by the foreign key (cells 11-16).  We wrote queries (utilizing JOINs) testing:
-    Does Catalog_ID make sense with Program_Code & Program_Name?
-    Confirming that Professor Lane teaches Economics classes
-    Check that Title and Course_Title are the same
-    Check that Day, Start, End match Meetings
+- Relational integrity: testing to ensure that table relationships are consistent, or that any foreign key field must agree with the primary key.  We wrote queries (utilizing JOINs) testing:
+- Does Catalog_ID make sense with Program_Code & Program_Name?
+- Confirming that Professor Lane teaches Economics classes
+- Check that Title and Course_Title are the same
+- Check that Day, Start, End match Meetings
 
 
 # Step 4 - Design and Build Data Warehouse
@@ -72,49 +72,49 @@ Our team created a [testing notebook](https://github.com/fairfield-ba510-spring2
 The fifth step was to design an [ERD for our data warehouse](https://github.com/fairfield-ba510-spring2020/term-project-cornertable/blob/master/CourseDataWarehouseERD.pdf). We utilized a star schema design to construct our data warehouse with CLASS_FACTS_DW as our facts table. To extract transform and load data from our CourseData Database into our [data warehouse](https://github.com/fairfield-ba510-spring2020/term-project-cornertable/blob/master/CourseDataWarehouseETL.ipynb) we constructed five dimension tables along with our fact table:
 
 1. COURSES_DW, containing:
-    course_id
-    CatalogYear
-    catalog_id
-    course_title
-    credits
-    program_id 
+    course_id, 
+    CatalogYear, 
+    catalog_id, 
+    course_title, 
+    credits, 
+    program_id
     
 2. TIMECODES_DW, containing:
-    timecode_id
-    day
-    start
+    timecode_id, 
+    day, 
+    start, 
     end
     
 3. PROGRAMS_DW, containing:
-    program_id
-    program_code
+    program_id, 
+    program_code, 
     program_name
     
 4. PROFESSORS_DW, containing:
-    professor_id
+    professor_id, 
     name
 
 5. LOCATIONS_DW, containing:
-    Location_id
+    Location_id, 
     Location 
     
 6. COURSE_FACTS_DW, containing:
-    Course_id 
-    Program_id 
-    Location_id 
-    Professor_id 
-    Offering_id 
-    Timecode_id 
-    CatalogYear
-    Term
-    Credits
-    Section 
-    Cap
-    Actual
-    Remaining
-    Timecodes
-    Count_courses
-    Num_students
+    Course_id,  
+    Program_id,  
+    Location_id, 
+    Professor_id,  
+    Offering_id,  
+    Timecode_id, 
+    CatalogYear, 
+    Term, 
+    Credits, 
+    Section,  
+    Cap, 
+    Actual, 
+    Remaining, 
+    Timecodes, 
+    Count_courses, 
+    Num_students, 
     Count_location
 
 We followed similar steps to create our Warehouse:
@@ -126,15 +126,15 @@ We followed similar steps to create our Warehouse:
 5. Vacuum data to resolve storage issues.
 
 
-# Step 6 - Test CourseDataWarehouse.db for data integrity
+# Step 5 - Test CourseDataWarehouse.db for data integrity
 
 [This step](https://github.com/fairfield-ba510-spring2020/term-project-cornertable/blob/master/CourseDataWarehouseTest.ipynb) was completed in the same manner as our database file, testing for Domain, Entity and Relational integrity.
 
 
 
-# Step 7 - Demo your results with useful queries
+# Step 6 - Demo your results with useful queries
 
-We designed our warehouse with the idea that University administrators and deans- those who are responsible for monitoring program  Our questions include the following
+We designed our warehouse with the idea that University administrators and deans- those who are responsible for monitoring program attendance faculty courseload, classroom and course availability. It would be providing an organizational view of information needed to run and understand the university programming. [Our questions](https://github.com/fairfield-ba510-spring2020/term-project-cornertable/blob/master/CourseDataWarehouseDemo.ipynb) include the following:
 
 1. On which day are the most/least classes held?
 2. Which classroom is the most utilized, and what programs hold classes there?
@@ -144,8 +144,3 @@ We designed our warehouse with the idea that University administrators and deans
 6. Which classes go over capacity the most frequently? 
 7. Which classes are attracting less than 10 students?
 
-
-
-# Step 8 Deliver a walkthrough presentation of your work
-
-This [readme.md file](https://github.com/fairfield-ba510-spring2020/term-project-cornertable/blob/master/Readme.md) with serve as the guide for our work this semester, including a link to each of the files we will be reviewing.  Thank you very much for the opportunity to share this with you!
