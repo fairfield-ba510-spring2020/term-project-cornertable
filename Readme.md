@@ -27,7 +27,7 @@ The data from the csv files was used to build our Entity Relationship Diagram (E
 
 - CourseCatalog2017_2018.csv and CourseCatalog2018_2019.csv: columns included are program_code, program_name, catalog_id, course_title, dredits, prereqs, coreqs, fees, attributes, description.
 
-Using our general knowledge and Fairfield's course catalogs, we constructed a [Dictionary](https://github.com/fairfield-ba510-spring2020/term-project-cornertable/blob/master/CourseDataDictionary.md) to define each column, including the foreign keys we would introduce. After becoming familiar with these files, we constructed our [ERD](https://github.com/fairfield-ba510-spring2020/term-project-cornertable/blob/master/CourseDataERD.pdf)file.
+Using our general knowledge and Fairfield's course catalogs, we constructed a [Dictionary](https://github.com/fairfield-ba510-spring2020/term-project-cornertable/blob/master/CourseDataDictionary.md) to define each column, including the foreign keys we would introduce. After becoming familiar with these files, we constructed our [ERD](https://github.com/fairfield-ba510-spring2020/term-project-cornertable/blob/master/CourseDataERD.pdf) file.
 
 At a high-level, our ERD is designed as follows:
 
@@ -62,14 +62,14 @@ Our team created a [testing notebook](https://github.com/fairfield-ba510-spring2
       
 - Relational integrity: testing to ensure that table relationships are consistent, or that any foreign key field must agree with the primary key that is referenced by the foreign key (cells 11-16).  We wrote queries (utilizing JOINs) testing:
     Does Catalog_ID make sense with Program_Code & Program_Name?
-    Confirming that Professor Lane teaches Economics and Finance
+    Confirming that Professor Lane teaches Economics classes
     Check that Title and Course_Title are the same
     Check that Day, Start, End match Meetings
 
 
 # Step 4 - Design and Build Data Warehouse
 
-The fifth step was to design a data warehouse, which we saved as CourseDataWarehouse.db. We utilized a star schema design to construct our data warehouse with CLASS_FACTS_DW as our facts table. From there, we constructed five dimension tables:
+The fifth step was to design an [ERD for our data warehouse](https://github.com/fairfield-ba510-spring2020/term-project-cornertable/blob/master/CourseDataWarehouseERD.pdf). We utilized a star schema design to construct our data warehouse with CLASS_FACTS_DW as our facts table. To extract transform and load data from our CourseData Database into our [data warehouse](https://github.com/fairfield-ba510-spring2020/term-project-cornertable/blob/master/CourseDataWarehouseETL.ipynb) we constructed five dimension tables along with our fact table:
 
 1. COURSES_DW, containing:
     course_id
@@ -98,34 +98,54 @@ The fifth step was to design a data warehouse, which we saved as CourseDataWareh
     Location_id
     Location 
     
-Our ERD, written in a star schema, is located in the ERD for data warehouse2.pdf file.  
+6. COURSE_FACTS_DW, containing:
+    Course_id 
+    Program_id 
+    Location_id 
+    Professor_id 
+    Offering_id 
+    Timecode_id 
+    CatalogYear
+    Term
+    Credits
+    Section 
+    Cap
+    Actual
+    Remaining
+    Timecodes
+    Count_courses
+    Num_students
+    Count_location
 
+We followed similar steps to create our Warehouse:
 
-Once the ERD was created, we then built the data warehouse (CourseDataWarehouse.db), our process documented in the CourseDataWarehouseETL_Done notebook.  The dimension tables were contructed and populated first, followed by our fact table (CLASS_FACTS_DW).
+1. Loading the SQL extension and connecting SQLite to the warehouse
+2. Using DROP TABLE/ CREATE TABLE commands to add tables- first the strong entities (PROFESSORS_DW,PROGRAMS_DW,LOCATIONS_DW), then the weak entities (COURSES_DW,COURSE_OFFERINGS_DW) with foreign keys, followed last by the joint COURSE_FACTS_DW TABLE.
+3. As we were joining the tables, we constructed a help table to allow for easier access to the class start and end times (not a string with date/time)
+4. Use DELETE FROM/INSERT INTO commands to move data from the corresponding datasets into each warehouse table. We did this in the the same order table creations (strong, then weak) to minimize any potential JOIN issues
+5. Vacuum data to resolve storage issues.
 
 
 # Step 6 - Test CourseDataWarehouse.db for data integrity
 
-This step was completed in the same manner as our database file, testing for Domain, Entity and Relational integrity.  This is detailed in our file CourseDataWarehouseTests.ipynb
+[This step](https://github.com/fairfield-ba510-spring2020/term-project-cornertable/blob/master/CourseDataWarehouseTest.ipynb) was completed in the same manner as our database file, testing for Domain, Entity and Relational integrity.
 
 
 
 # Step 7 - Demo your results with useful queries
 
-Our questions include the following (found in WarehouseUtilization_Done.ipynb):
+We designed our warehouse with the idea that University administrators and deans- those who are responsible for monitoring program  Our questions include the following
 
-1) Which program has the most courses? The least?
-2) Which classroom is the most utilized, and what programs hold classes there?
-3) Which classes go over capacity the most frequently? 
-4) Which professors has the most diverse courseload?
-5) Which professor teaches in the highest number of programs?
-6) Which days are the most/least popular for classes?
-7) Which classes are attracting less than 10 students? (> 0)
+1. On which day are the most/least classes held?
+2. Which classroom is the most utilized, and what programs hold classes there?
+3. Which professors has the most diverse courseload?
+4. Which professor teaches in the highest number of programs?
+5. Which program has the most/least amount of courses?
+6. Which classes go over capacity the most frequently? 
+7. Which classes are attracting less than 10 students?
 
 
 
 # Step 8 Deliver a walkthrough presentation of your work
 
-This readme.md file with serve as the guide for our work this semester, including a link to each of the files we will be reviewing.  Thank you very much for the opportunity to share this with you!
-
-- Team Cornertable
+This [readme.md file](https://github.com/fairfield-ba510-spring2020/term-project-cornertable/blob/master/Readme.md) with serve as the guide for our work this semester, including a link to each of the files we will be reviewing.  Thank you very much for the opportunity to share this with you!
