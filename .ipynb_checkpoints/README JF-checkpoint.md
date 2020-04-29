@@ -11,10 +11,10 @@ For our semester project, Team Cornertable produced a database and a data wareho
 
 - Translating and documenting the data through the creation of an ERD which we used to structure and design our database (Coursedata.db)
 - Uploading the data (csv files) and populating the database
-- Testing our database to ensure domain, entity, relational integrity (CourseDataTests.ipynb)
+- Testing our database to ensure domain, entity, and relational integrity (CourseDataTests - FINAL.ipynb)
 - Creation of a data warehouse (DataWarehouse.db) in a star-schema format
-- Testing our data warehouse to ensure domain, entity, relational integrity (CourseDataWarehouseTests.ipynb)
-- Querying our database/data warehouse in order to answer key questions and demonstrate the efficiency and usefulness of our data warehouse  (WarehouseUtilization.ipynb)
+- Testing our data warehouse to ensure domain, entity, and relational integrity (CourseDataWarehouseTests - FINAL.ipynb)
+- Querying our database/data warehouse in order to answer key questions and demonstrate the efficiency and usefulness of our data warehouse  (WarehouseUtilization_Done.ipynb)
 
 
 ## Step 1 - ERD
@@ -53,14 +53,14 @@ The third step was this import the raw data into the database, which we accompli
 
 # Step 4 - Testing Integrity
 
-Our team created a new notebook, CourseDataTests.ipynb, to test the integrity of our database.  This file contains each of the queries we wrote to check:
+Our team created a new notebook, CourseDataTests - FINAL.ipynb, to test the integrity of our database.  This file contains each of the queries we wrote to check:
 
-- Domain integrity: the allowed values of an attribute determine domain integrity, definitions include data type, length, range or constraints.  This test was completed in cell 3.
+- Domain integrity: the allowed values of an attribute determine domain integrity, definitions include data type, length, range or constraints.  This test was completed in cells 3 and 4.  Here we ran SELECT queries to determine that the number of records in each table made sense (CatalogCourses, CourseOfferings, and CourseMeetings).  
 
-- Entity integrity: testing to ensure that each object represented by a row in the table should be distiguishable from any other object.  Here we ran SELECT queries to determine that the number of records in each table made sense, completed in cell 4(CatalogCourses, CourseOfferings, and CourseMeetings).
+- Entity integrity: testing to ensure that each object represented by a row in the table should be distiguishable from any other object.  SELECT queries where again utilized to ensure that we successfully retrieved unique values for Professors, Programs, Locations, Courses, Course Offerings, and Meetings (cells 5-10).
 
       
-- Relational integrity: testing to ensure that table relationships are consistent, or that any foreign key field must agree with the primary key that is referenced by the foreign key.  We wrote queries (utilizing JOINs) testing:
+- Relational integrity: testing to ensure that table relationships are consistent, or that any foreign key field must agree with the primary key that is referenced by the foreign key (cells 11-16).  We wrote queries (utilizing JOINs) testing:
     Does Catalog_ID make sense with Program_Code & Program_Name?
     Confirming that Professor Lane teaches Economics and Finance
     Check that Title and Course_Title are the same
@@ -101,7 +101,7 @@ The fifth step was to design a data warehouse, which we saved as CourseDataWareh
 Our ERD, written in a star schema, is located in the ERD for data warehouse2.pdf file.  
 
 
-Once the ERD was created, we then built the data warehouse (CourseDataWarehouse.db), our process documented in the CourseDataWarehouseETL notebook.  The dimension tables were contructed and populated first, followed by our fact table (CLASS_FACTS_DW).
+Once the ERD was created, we then built the data warehouse (CourseDataWarehouse.db), our process documented in the CourseDataWarehouseETL_Done notebook.  The dimension tables were contructed and populated first, followed by our fact table (CLASS_FACTS_DW).
 
 
 # Step 6 - Test CourseDataWarehouse.db for data integrity
@@ -112,19 +112,20 @@ This step was completed in the same manner as our database file, testing for Dom
 
 # Step 7 - Demo your results with useful queries
 
-Our questions include the following:
+Our questions include the following (found in WarehouseUtilization_Done.ipynb:
 
-Which classroom is the most utilized?
-Which classes go over capacity the most? (cap>0 use remainder to indicate overage)
+Which program has the most courses? The least?
+Which classroom is the most utilized, and what programs hold classes there?
+Which classes go over capacity the most frequently? 
 Which professors has the most diverse courseload?
+Which professor teaches in the highest number of programs?
 Which days are the most/least popular for classes?
-Which teacher has taught the most students? (via actual, not cap)
 Which classes are attracting less than 10 students? (> 0)
 
 
 
 # Step 8 Deliver a walkthrough presentation of your work
 
-This readme.md file with serve as the guide for our work this semester, including a link to each of the files we will be reviewing.  Thank you very much for the opporunity to share this with you!
+This readme.md file with serve as the guide for our work this semester, including a link to each of the files we will be reviewing.  Thank you very much for the opportunity to share this with you!
 
 - Team Cornertable
